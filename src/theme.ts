@@ -1,5 +1,5 @@
-import {createMuiTheme} from "@material-ui/core"
-import {themeDark} from "./Constants";
+import {createMuiTheme} from '@material-ui/core';
+import {themeDark} from './Constants';
 
 
 /**
@@ -18,22 +18,7 @@ const theme = createMuiTheme(
             MuiCssBaseline: {
                 '@global': {
                     html: {
-                        '@media (min-width:0px)': {
-                            fontSize: 16
-                        },
-                        '@media (min-width:600px)': {
-                            fontSize: 20
-                        },
-                        '@media (min-width:960px)': {
-                            fontSize: 24
-                        },
-                        '@media (min-width:1280px)': {
-                            fontSize: 16
-                        },
-                        '@media (min-width:1920px)': {
-                            fontSize: 29
-                        },
-
+                        fontSize: 'calc(0.6em + 1vmin)'
                     },
                     body: {
                         backgroundImage: `url(${themeDark ? '/backgroundDark-min.jpg' : '/backgroundLight.jpg'})`,

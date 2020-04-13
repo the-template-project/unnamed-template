@@ -11,7 +11,7 @@ import {
     shiftVia,
     TDirectionFullObjects,
     TDirections
-} from "../shiftVia";
+} from '../shiftVia';
 
 
 /**
@@ -23,9 +23,9 @@ import {
  */
 
 type StyleProps = {
-    method: 'margin' | 'transform'
-    amount: INonDiagShiftProps | IDiagShiftProps
-    direction: TDirections
+    method: 'margin' | 'transform';
+    amount: INonDiagShiftProps | IDiagShiftProps;
+    direction: TDirections;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>(theme => ({
@@ -56,29 +56,29 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
 }));
 
 type Props = {
-        on: boolean
-        method: 'margin',
-        amount: INonDiagShiftProps,
-        direction: keyof INonDiagMargin
+        on: boolean;
+        method: 'margin';
+        amount: INonDiagShiftProps;
+        direction: keyof INonDiagMargin;
     }
     | {
-    on: boolean
-    method: 'transform',
-    amount: INonDiagShiftProps,
-    direction: keyof INonDiagTransform
+    on: boolean;
+    method: 'transform';
+    amount: INonDiagShiftProps;
+    direction: keyof INonDiagTransform;
 }
     | {
-    on: boolean
-    method: 'transform',
-    amount: IDiagShiftProps,
-    direction: keyof IDiagTransform
+    on: boolean;
+    method: 'transform';
+    amount: IDiagShiftProps;
+    direction: keyof IDiagTransform;
 
 }
     | {
-    on: boolean
-    method: 'margin',
-    amount: IDiagShiftProps,
-    direction: keyof IDiagMargin
+    on: boolean;
+    method: 'margin';
+    amount: IDiagShiftProps;
+    direction: keyof IDiagMargin;
 }
 
 const Shift: React.FC<Props> = (props) => {

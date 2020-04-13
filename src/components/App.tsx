@@ -1,5 +1,5 @@
-import React from 'react'
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+import React from 'react';
+import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 import {
     CssBaseline,
     Divider,
@@ -13,14 +13,14 @@ import {
     Toolbar,
     useMediaQuery
 } from '@material-ui/core';
-import MenuIcon from "@material-ui/icons/Menu";
-import {makeStyles} from "@material-ui/core/styles";
-import theme from "../theme";
-import DrawerMenu from "./DrawerMenu";
-import {drawerWidth, tabs} from "../Constants";
-import Logo from "./Logo";
+import MenuIcon from '@material-ui/icons/Menu';
+import {makeStyles} from '@material-ui/core/styles';
+import theme from '../theme';
+import DrawerMenu from './DrawerMenu';
+import {drawerWidth, tabs} from '../Constants';
+import Logo from './Logo';
 import useDrawer from '../useDrawer';
-import Shift from "./Shift";
+import Shift from './Shift';
 
 const useStyles = makeStyles(theme => {
     return {
@@ -32,14 +32,14 @@ const useStyles = makeStyles(theme => {
             paddingRight: theme.spacing(2),
             fontFamily: 'Shrikhand, Roboto',
         },
-    }
+    };
 });
 
 
 const App: React.FC = () => {
-    const [drawerOpen, toggleDrawer] = useDrawer();
+    const [drawerOpen, toggleDrawer] = useDrawer(); // drawerOpen -> true if drawer is open.   toggleDrawer() -> changes drawer between open and closed.
     const classes = useStyles();
-    const isXsDevice = useMediaQuery(theme.breakpoints.down('xs'));
+    const isXsDevice = useMediaQuery(theme.breakpoints.down('xs'));  // if device screen with is
 
     return (
         <ThemeProvider theme={theme}>
@@ -58,7 +58,7 @@ const App: React.FC = () => {
                     </List>
                 </DrawerMenu>
                 <Shift on={isXsDevice ? false : drawerOpen} method={'margin'} amount={{x: `${drawerWidth}`}}
-                       direction={"right"}>
+                       direction={'right'}>
                     <header>
                         <Toolbar>
                             <Fade in={!drawerOpen}>
@@ -70,7 +70,7 @@ const App: React.FC = () => {
                                     <MenuIcon/>
                                 </IconButton>
                             </Fade>
-                            <Shift on={isXsDevice ? false : drawerOpen} method={"transform"} amount={{x: `${-36}px`}}
+                            <Shift on={isXsDevice ? false : drawerOpen} method={'transform'} amount={{x: `${-36}px`}}
                                    direction={'horizontal'}>
                                 <Logo className={classes.logo}/>
                             </Shift>
@@ -86,9 +86,8 @@ const App: React.FC = () => {
                                         path={tab.path}
                                         key={tab.path}
                                         exact
-                                    >
-                                        {tab.component}
-                                    </Route>
+                                        component={tab.component}
+                                    />
                                 ))
                             }
                         </Switch>
@@ -96,7 +95,7 @@ const App: React.FC = () => {
                 </Shift>
             </Router>
         </ThemeProvider>
-    )
+    );
 };
 
 
