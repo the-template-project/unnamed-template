@@ -1,92 +1,107 @@
-import React from 'react';
-import {Avatar, Container, Divider, Fade, Paper, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import React, {useEffect, useRef, useState} from 'react';
+import {Avatar, Container, Divider, Fade, Paper, Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
-import useDrawer from '../useDrawer';
+import KeyValueList from "./KeyValueList";
 
 
-const Home: React.FC = () => {
-    const useStyles = makeStyles(theme => ({
-        gridContainer: drawerOpen => {
-            return {
-                display: 'grid',
-                gridTemplateColumns: 'repeat(5, 1fr)',
-                gridTemplateRows: 'minmax(100px, auto)',
-                gridTemplateAreas: `
+const useStyles = makeStyles({
+    gridContainer: (screenSpaceIsEnough: boolean) => {
+        return {
+            display: 'grid',
+            gridTemplateRows: 'minmax(100px, auto)',
+            gridGap: '10px',
+            gridTemplateColumns: screenSpaceIsEnough ? 'repeat(5, 1fr)' : 'repeat(3, 1fr)',
+            gridTemplateAreas: screenSpaceIsEnough ? `
         "avatar avatar greeting greeting greeting" 
         "avatar avatar title title title"    
         "avatar avatar description description description" 
-        `,
-                gridGap: '10px',
-                [theme.breakpoints.down(drawerOpen ? 'md' : 'sm')]: {
-                    gridTemplateAreas: `
+        ` : `
             "avatar avatar avatar"
             "greeting greeting greeting"
             "title title title"
             "description description description"
         `,
-                    gridTemplateColumns: 'repeat(3, 1fr)',
-                }
+            //         [theme.breakpoints.down(screenSpaceIsEnough ? 'md' : 'sm')]: {
+            //             gridTemplateAreas: `
+            //     "avatar avatar avatar"
+            //     "greeting greeting greeting"
+            //     "title title title"
+            //     "description description description"
+            // `,
+            //             gridTemplateColumns: 'repeat(3, 1fr)',
+            //         }
 
-            };
-        },
-        paper: {
-            marginTop: '5vh',
-            padding: '55px',
-        },
-        greeting: {},
-        titleContainer: {
-            gridArea: 'title'
+        };
+    },
+    paper: {
+        marginTop: '5vh',
+        padding: '55px',
+    },
+    greeting: {},
+    titleContainer: {
+        gridArea: 'title'
 
-        },
-        title: {
-            fontWeight: 300
-        },
-        titleSpan: {
-            fontWeight: 600
-        },
-        subTitle: {
-            marginBottom: '20px',
-        },
-        avatar: {
-            width: '100%',
-            height: 'auto'
-        },
-        avatarContainer: {
-            gridArea: 'avatar',
-            padding: '20px',
-            paddingRight: '30px',
-            paddingTop: 0
+    },
+    title: {
+        fontWeight: 300
+    },
+    titleSpan: {
+        fontWeight: 600
+    },
+    subTitle: {
+        marginBottom: '20px',
+    },
+    avatar: {
+        width: '100%',
+        height: 'auto'
+    },
+    avatarContainer: {
+        gridArea: 'avatar',
+        padding: '20px',
+        paddingRight: '30px',
+        paddingTop: 0
 
-        },
-        ulStyles: {
-            gridArea: 'description',
-            listStyle: 'none',
-            padding: 0,
-            paddingTop: '10px'
-        },
-        liStyles: {
-            marginBottom: '15px',
-            display: 'flex',
+    },
+    ulStyles: {
+        gridArea: 'description',
+        listStyle: 'none',
+        padding: 0,
+        paddingTop: '10px'
+    },
+    liStyles: {
+        marginBottom: '15px',
+        display: 'flex',
 
-        },
-        spanStyles: {
-            width: '70%',
-            display: 'block',
-            textAlign: 'left'
-        },
-        bStyles: {
-            width: '30%',
-        }
-    }));
+    },
+    spanStyles: {
+        width: '70%',
+        display: 'block',
+        textAlign: 'left'
+    },
+    bStyles: {
+        width: '30%',
+    }
+});
 
+const Home: React.FC = () => {
 
-    const [drawerOpen] = useDrawer();
-    const classes = useStyles(drawerOpen);
-    const theme = useTheme();
-    const screenSpaceIsEnough = useMediaQuery(theme.breakpoints.up(drawerOpen ? 'sm' : 'md'));
+    /**
+     * Creates a size checker of the paper component, so that it properly resizes when it viewport width changes too
+     */
+    const [screenSpaceIsEnough, setScreenSpace] = useState<boolean>(true);
+    const classes = useStyles(screenSpaceIsEnough);
+    const divRef = useRef(null);
+    useEffect(() => {
+        const observer: ResizeObserver = new ResizeObserver(([div]) => {
+            if (div.contentRect.width >= 868) setScreenSpace(true);
+            else setScreenSpace(false);
+        });
+        observer.observe(divRef.current!);
+    });
+
     return (
         <Fade in={true}>
-            <Container fixed={true} maxWidth={screenSpaceIsEnough ? 'md' : 'sm'}>
+            <Container ref={divRef} fixed={true} maxWidth={'md'}>
                 <Paper className={classes.paper}>
                     <div className={classes.gridContainer}>
                         <div className={classes.greeting}>
@@ -99,18 +114,18 @@ const Home: React.FC = () => {
                         </div>
                         <div className={classes.titleContainer}>
                             <Typography className={classes.title} component={'h1'} variant={'h5'}>
-                                {'I\'m '}<span className={classes.titleSpan}>{'Alexander Hristov'} </span>
+                                {'I\'m '}<span className={classes.titleSpan}>{'Andrea Piacquadio'} </span>
                             </Typography>
                             <Typography className={classes.subTitle} component={'h2'} variant={'h6'}>
-                                an aspiring developer.
+                                an aspiring photographer.
                             </Typography>
                             <Divider/>
                         </div>
                         <KeyValueList
                             keyValues={{
-                                'AGE': '20',
-                                'EMAIL': 'xerauquill@gmail.com',
-                                'PHONE': '+359876685819',
+                                'AGE': '25',
+                                'EMAIL': 'randomEmail@randomDomain.com',
+                                'PHONE': '+4212312345',
                                 'JOB': 'Looking'
                             }}
                             ulClassName={classes.ulStyles}
@@ -122,32 +137,6 @@ const Home: React.FC = () => {
                 </Paper>
             </Container>
         </Fade>
-
-    );
-};
-
-interface KeyValueProps {
-    keyValues: {
-        [key: string]: string;
-    };
-    ulClassName?: string;
-    liClassName?: string;
-    bClassName?: string;
-    spanClassName?: string;
-}
-
-const KeyValueList: React.FC<KeyValueProps> = (props) => {
-    return (
-        <ul className={props.ulClassName}>
-            {
-                Object.entries(props.keyValues).map(([key, value]) => (
-                    <li className={props.liClassName} key={key}>
-                        <b className={props.bClassName}>{key}</b>
-                        <span className={props.spanClassName}>{value}</span>
-                    </li>
-                ))
-            }
-        </ul>
     );
 };
 

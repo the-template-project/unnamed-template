@@ -40,12 +40,9 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
     },
     contentShift: props => {
         const {method, amount, direction} = props;
-
-
         const shift: TDirectionFullObjects = shiftVia(method).by(amount);
 
         return {
-
             transition: theme.transitions.create(method, {
                 easing: theme.transitions.easing.easeOut,
                 duration: theme.transitions.duration.enteringScreen
