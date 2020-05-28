@@ -3,7 +3,10 @@ import React from "react";
 const Projects: React.FC = () => {
     return (
         <div>
-            Projects.
+            <h1>Projects</h1>
+            {/*
+            TODO Do this here!!!
+            */}
         </div>
     )
 };
