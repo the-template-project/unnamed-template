@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Avatar, Container, Divider, Fade, Paper, Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import KeyValueList from "./KeyValueList";
-
+import meImage from '../images/Me.jpg'
 
 const useStyles = makeStyles({
     gridContainer: (screenSpaceIsEnough: boolean) => {
@@ -110,7 +110,7 @@ const Home: React.FC = () => {
                             </Typography>
                         </div>
                         <div className={classes.avatarContainer}>
-                            <Avatar src={'/Me.jpg'} variant={'square'} className={classes.avatar}/>
+                            <Avatar src={meImage} variant={'square'} className={classes.avatar}/>
                         </div>
                         <div className={classes.titleContainer}>
                             <Typography className={classes.title} component={'h1'} variant={'h5'}>

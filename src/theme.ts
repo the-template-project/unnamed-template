@@ -1,4 +1,5 @@
 import {createMuiTheme} from '@material-ui/core';
+import background from "./images/backgroundDark-min.jpg";
 
 const theme = createMuiTheme(
     {
@@ -9,7 +10,7 @@ const theme = createMuiTheme(
                         fontSize: 'calc(0.6em + 1vmin)'
                     },
                     body: {
-                        backgroundImage: `url(/backgroundDark-min.jpg)`,
+                        backgroundImage: `url(${background})`,
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'cover',
                         backgroundAttachment: 'fixed'
