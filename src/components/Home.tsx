@@ -5,7 +5,6 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import KeyValueList from './KeyValueList';
 
-
 const useStyles = makeStyles({
   gridContainer: (screenSpaceIsEnough: boolean) => ({
     display: 'grid',
