@@ -1,32 +1,36 @@
-import React from "react";
+import React from 'react';
 
 interface KeyValueProps {
-    keyValues: {
-        [key: string]: string;
-    };
-    ulClassName?: string;
-    liClassName?: string;
-    bClassName?: string;
-    spanClassName?: string;
+  keyValues: {
+    [key: string]: string;
+  };
+  ulClassName?: string;
+  liClassName?: string;
+  bClassName?: string;
+  spanClassName?: string;
 }
 
-const KeyValueList: React.FC<KeyValueProps> = (props) => {
-    return (
-        <ul className={props.ulClassName}>
-            {
-                Object.entries(props.keyValues).map(([key, value]) => (
-                    <li className={props.liClassName} key={key}>
-                        <b className={props.bClassName}>
-                            {key}
-                        </b>
-                        <span className={props.spanClassName}>
-                            {value}
-                        </span>
-                    </li>
-                ))
-            }
-        </ul>
-    );
-};
+const KeyValueList: React.FC<KeyValueProps> = ({
+  ulClassName,
+  spanClassName,
+  bClassName,
+  liClassName,
+  keyValues,
+}) => (
+  <ul className={ulClassName}>
+    {
+        Object.entries(keyValues).map(([key, value]) => (
+          <li className={liClassName} key={key}>
+            <b className={bClassName}>
+              {key}
+            </b>
+            <span className={spanClassName}>
+              {value}
+            </span>
+          </li>
+        ))
+      }
+  </ul>
+);
 
 export default React.memo(KeyValueList);
