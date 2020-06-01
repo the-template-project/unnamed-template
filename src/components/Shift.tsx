@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core';
 import {
   DiagMargin,
@@ -88,10 +87,8 @@ const Shift: React.FC<Props> = (props) => {
   return (
     <div
       className={
-            clsx(classes.content, {
-              [classes.contentShift]: on,
-            })
-          }
+          `${classes.content} ${on ? classes.contentShift : ''}`
+      }
     >
       {children}
     </div>
