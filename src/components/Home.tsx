@@ -4,6 +4,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import KeyValueList from './KeyValueList';
+import MeImage from '../images/Me.jpg';
 
 const useStyles = makeStyles({
   gridContainer: (screenSpaceIsEnough: boolean) => ({
@@ -109,7 +110,7 @@ const Home: React.FC = () => {
               </Typography>
             </div>
             <div className={classes.avatarContainer}>
-              <Avatar src="/Me.jpg" variant="square" className={classes.avatar} />
+              <Avatar src={MeImage} variant="square" className={classes.avatar} />
             </div>
             <div className={classes.titleContainer}>
               <Typography className={classes.title} component="h1" variant="h5">
