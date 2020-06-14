@@ -10,7 +10,7 @@ const useDimensions = <T extends HTMLElement>(
       callBack(element.contentRect);
     });
     observer.observe(el.current!);
-  }, []);
+  }, [el, callBack]);
 };
 
 export default useDimensions;

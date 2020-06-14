@@ -1,4 +1,5 @@
 import React, {
+  useCallback,
   useRef, useState,
 } from 'react';
 import {
@@ -6,7 +7,6 @@ import {
 } from '@material-ui/core';
 import MeImage from '../images/MeAbout.jpg';
 import useDimensions from '../useDimensions';
-
 
 const useStyles = makeStyles({
   container: (spaceIsEnough) => ({
@@ -47,6 +47,7 @@ const useStyles = makeStyles({
     gridArea: 'T',
   },
   description: {
+    paddingLeft: '20px',
     gridArea: 'D',
     maxWidth: '33rem',
     fontWeight: 400,
@@ -66,9 +67,11 @@ const About: React.FC = () => {
   // and use it as you would use a media query (..almost).
   const [sizeIsEnough, setSizeIsEnough] = useState(false);
   const containerRef = useRef(null);
-  useDimensions(containerRef, ({ width }) => {
-    setSizeIsEnough(width > 880);
-  });
+
+  useDimensions(containerRef,
+    useCallback(({ width }) => {
+      setSizeIsEnough(width > 880);
+    }, []));
   const classes = useStyles(sizeIsEnough);
 
   return (
