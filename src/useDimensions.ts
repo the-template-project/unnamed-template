@@ -6,12 +6,13 @@ const useDimensions = <T extends HTMLElement>(
   callBack: (rect: DOMRectReadOnly) => void,
 ): void => {
   useEffect(() => {
+    const currentElement = el;
     const observer: ResizeObserver = new ResizeObserver(([element]) => {
       callBack(element.contentRect);
     });
-    observer.observe(el.current!);
+    observer.observe(currentElement.current!);
     return () => {
-      observer.unobserve(el.current!);
+      observer.unobserve(currentElement.current!);
     };
   }, [el, callBack]);
 };
