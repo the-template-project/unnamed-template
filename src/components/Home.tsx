@@ -1,5 +1,5 @@
 import React, {
-  useCallback, useEffect, useRef, useState,
+  useCallback, useRef, useState,
 } from 'react';
 import {
   Avatar, Container, Divider, Fade, Paper, Typography,
