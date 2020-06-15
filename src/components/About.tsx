@@ -47,7 +47,6 @@ const useStyles = makeStyles({
     gridArea: 'T',
   },
   description: {
-    paddingLeft: '20px',
     gridArea: 'D',
     maxWidth: '33rem',
     fontWeight: 400,

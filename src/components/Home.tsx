@@ -1,10 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback, useEffect, useRef, useState,
+} from 'react';
 import {
   Avatar, Container, Divider, Fade, Paper, Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import KeyValueList from './KeyValueList';
 import MeImage from '../images/Me.jpg';
+import useDimensions from '../useDimensions';
 
 const useStyles = makeStyles({
   gridContainer: (screenSpaceIsEnough: boolean) => ({
@@ -88,16 +91,13 @@ const Home: React.FC = () => {
    * Creates a size checker of the paper component, so that it
    * properly resizes when it viewport width changes too
    */
-  const [screenSpaceIsEnough, setScreenSpace] = useState<boolean>(true);
-  const classes = useStyles(screenSpaceIsEnough);
+  const [sizeIsEnough, setSizeIsEnough] = useState<boolean>(true);
+  const classes = useStyles(sizeIsEnough);
   const divRef = useRef(null);
-  useEffect(() => {
-    const observer: ResizeObserver = new ResizeObserver(([div]) => {
-      if (div.contentRect.width >= 868) setScreenSpace(true);
-      else setScreenSpace(false);
-    });
-    observer.observe(divRef.current!);
-  });
+  useDimensions(divRef,
+    useCallback(({ width }) => {
+      setSizeIsEnough(width > 868);
+    }, []));
 
   return (
     <Fade in>
